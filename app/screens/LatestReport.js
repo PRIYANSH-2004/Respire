@@ -4,12 +4,17 @@ import { Card } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Progress from "react-native-progress";
 import { useNavigation } from "@react-navigation/native";
+import lungSound from "../../assets/data";
 
-const LatestDate = "23/03/2025";
-const LatestTime = "15:46";
-const Probbility = 79;
-const NewPatient = false;
-
+let NewPatient;
+// if (Array.isArray(lungSound) && lungSound.length > 0) {
+const LatestDate = lungSound[0].date;
+const LatestTime = lungSound[0].time;
+const Probability = lungSound[0].predicted_probability;
+NewPatient = false;
+// } else {
+// NewPatient = true;
+// }
 const LatestReport = () => {
   const navigation = useNavigation();
   return (
@@ -33,9 +38,9 @@ const LatestReport = () => {
               <Text style={styles.verdict}>Verdict</Text>
               <Progress.Circle
                 size={90}
-                progress={Probbility / 100} // Progress value (0 to 1)
+                progress={Probability / 100} // Progress value (0 to 1)
                 showsText={true}
-                formatText={() => `${Probbility}%`}
+                formatText={() => `${Probability}%`}
                 color="#3498db"
                 borderWidth={3}
                 thickness={5}

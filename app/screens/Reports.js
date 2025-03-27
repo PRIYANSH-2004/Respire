@@ -8,18 +8,26 @@ import {
 import React from "react";
 import lungSound from "../../assets/data";
 import { Card } from "react-native-paper";
+import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+
 const Reports = () => {
   console.log("repots has been opend");
+  const navigation = useNavigation();
   const handleDownload = (item) => {
-    console.log("Downloadin item:\n", item);
+    // console.log("Downloadin item:\n", item);
+    navigation.navigate("Temp Download", { item });
   };
   return (
     <View>
       <ScrollView>
         {/* <Text>Reports</Text> */}
         {lungSound.map((item, index) => (
-          <View>
-            <Card style={styles.card}>
+          <View key={index}>
+            <Card
+              style={styles.card}
+              onPress={() => navigation.navigate("Detailed Report", { item })}
+            >
               <View style={styles.cardRow}>
                 <View style={styles.indexBox}>
                   <Text style={styles.indexText}>{index + 1}</Text>
@@ -35,7 +43,12 @@ const Reports = () => {
                     handleDownload(item);
                   }}
                 >
-                  <Text>download</Text>
+                  <MaterialIcons
+                    name="file-download"
+                    size={24}
+                    // color="#3498db"
+                    color="black"
+                  />
                 </TouchableOpacity>
               </View>
             </Card>
@@ -76,7 +89,7 @@ const styles = StyleSheet.create({
   },
 
   dowloadIcon: {
-    marginRight: "auto",
+    marginLeft: 100, // this is hardcoded make sure to change this
     padding: 5,
   },
 });
