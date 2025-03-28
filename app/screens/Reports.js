@@ -10,6 +10,7 @@ import lungSound from "../../assets/data";
 import { Card } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Reports = () => {
   console.log("repots has been opend");
@@ -19,7 +20,10 @@ const Reports = () => {
     navigation.navigate("Temp Download", { item });
   };
   return (
-    <View>
+    <LinearGradient
+      colors={["#4c669f", "#3b5998", "#192f6a"]}
+      style={styles.gradient}
+    >
       <ScrollView>
         {/* <Text>Reports</Text> */}
         {lungSound.map((item, index) => (
@@ -55,13 +59,16 @@ const Reports = () => {
           </View>
         ))}
       </ScrollView>
-    </View>
+    </LinearGradient>
   );
 };
 
 export default Reports;
 
 const styles = StyleSheet.create({
+  gradient: {
+    flex: 1,
+  },
   card: {
     flexDirection: "row",
     backgroundColor: "rgba(51, 163, 176, 0.8)",
