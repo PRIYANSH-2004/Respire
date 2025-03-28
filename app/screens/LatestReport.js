@@ -7,14 +7,11 @@ import { useNavigation } from "@react-navigation/native";
 import lungSound from "../../assets/data";
 
 let NewPatient;
-// if (Array.isArray(lungSound) && lungSound.length > 0) {
 const LatestDate = lungSound[0].date;
 const LatestTime = lungSound[0].time;
 const Probability = lungSound[0].predicted_probability;
 NewPatient = false;
-// } else {
-// NewPatient = true;
-// }
+
 const LatestReport = () => {
   const navigation = useNavigation();
   return (
@@ -38,7 +35,7 @@ const LatestReport = () => {
               <Text style={styles.verdict}>Verdict</Text>
               <Progress.Circle
                 size={90}
-                progress={Probability / 100} // Progress value (0 to 1)
+                progress={Probability / 100}
                 showsText={true}
                 formatText={() => `${Probability}%`}
                 color="#3498db"
@@ -76,24 +73,22 @@ const styles = StyleSheet.create({
     margin: 20,
     position: "relative",
     overflow: "hidden",
+    width: "90%",
   },
   card: {
     backgroundColor: "rgba(202, 237, 206, 0.8)",
     borderRadius: 15,
     padding: 20,
     margin: 15,
-    position: "relative",
+    width: "90%",
+    height: "auto",
+    alignSelf: "center",
     overflow: "hidden",
-  },
-  box: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
   },
   details: {
     flex: 1,
-    justifyContent: "space-between", // Distribute content vertically
-    flexDirection: "column", // Ensure vertical alignment
+    justifyContent: "space-between",
+    flexDirection: "column",
   },
   title: {
     fontSize: 22,
@@ -103,7 +98,7 @@ const styles = StyleSheet.create({
   dateTime: {
     flexDirection: "column",
     justifyContent: "space-between",
-    marginTop: 40, // Add spacing between "Latest Data" and Date/Time
+    marginTop: 40,
   },
   time: {
     fontSize: 14,
@@ -125,6 +120,11 @@ const styles = StyleSheet.create({
     fontSize: 10,
     marginTop: 10,
     textAlign: "center",
+  },
+  box: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   noDataBox: {
     alignItems: "center",

@@ -7,48 +7,72 @@ import Reports from "./screens/Reports";
 
 const UserCard = () => {
   return (
-      <LinearGradient
-       
-        colors={['rgba(51, 176, 107, 0.8)', 'rgba(34, 87, 58, 0.8)']}
+    <LinearGradient
+      colors={["rgba(51, 176, 107, 0.8)", "rgba(34, 87, 58, 0.8)"]}
+      style={styles.main}
+    >
+      <Card
         style={styles.card}
+        onPress={() => {
+          console.log("Card Pressed");
+        }}
+        // onPress={<Reports/>}
       >
-        <Card style={styles.card}
-          onPress={()=>{console.log("Card Pressed")}}
-          // onPress={<Reports/>}
+        <View
+          style={styles.header}
+          // onPress={()=>{console.log("Card Pressed")}}
         >
-          <View style={styles.header}
-            // onPress={()=>{console.log("Card Pressed")}}
-          >
-            <Avatar.Image 
-              size={50}
-              source={require('../assets/user.png')}
-              style={styles.avatar}
-            />
-            {/* <Ionicons name="settings-outline" size={24} color="black" /> */}
-            <Image source={require('../assets/RespireLogo2.png')} style={styles.logo} />
-          </View>
+          <Avatar.Image
+            size={50}
+            source={require("../assets/user.png")}
+            style={styles.avatar}
+          />
+          {/* <Ionicons name="settings-outline" size={24} color="black" /> */}
+          <Image
+            source={require("../assets/RespireLogo2.png")}
+            style={styles.logo}
+          />
+        </View>
 
-          <Text style={styles.patientText}>Patient</Text>
-          <Text style={styles.name}>Richard</Text>
+        <Text style={styles.patientText}>Patient</Text>
+        <Text style={styles.name}>Richard</Text>
 
-          <View style={styles.infoContainer}>
-            <Text style={styles.infoText}>Age{"\n"}<Text style={styles.boldText}>38 yrs</Text></Text>
-            <Text style={styles.infoText}>Gender{"\n"}<Text style={styles.boldText}>Male</Text></Text>
-            <Text style={styles.infoText}>Mobile No.{"\n"}<Text style={styles.boldText}>9999999999</Text></Text>
-          </View>
-
-        </Card>
-      </LinearGradient>
+        <View style={styles.infoContainer}>
+          <Text style={styles.infoText}>
+            Age{"\n"}
+            <Text style={styles.boldText}>38 yrs</Text>
+          </Text>
+          <Text style={styles.infoText}>
+            Gender{"\n"}
+            <Text style={styles.boldText}>Male</Text>
+          </Text>
+          <Text style={styles.infoText}>
+            Mobile No.{"\n"}
+            <Text style={styles.boldText}>9999999999</Text>
+          </Text>
+        </View>
+      </Card>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
+  main: {
+    borderRadius: 15,
+    marginTop: 50,
+    margin: 20,
+    position: "relative",
+    overflow: "hidden",
+    width: "90%",
+  },
   card: {
-    backgroundColor:"rgba(202, 237, 206, 0.8)",
+    backgroundColor: "rgba(202, 237, 206, 0.8)",
     borderRadius: 15,
     padding: 20,
-    // marginTop:50,
-    position: "relative",
+    margin: 15,
+    width: "90%",
+    height: "auto",
+    alignSelf: "center",
     overflow: "hidden",
   },
   header: {
@@ -89,7 +113,6 @@ const styles = StyleSheet.create({
     bottom: 10,
     right: 10,
   },
-  
 });
 
 export default UserCard;

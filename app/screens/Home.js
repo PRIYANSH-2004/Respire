@@ -1,29 +1,24 @@
 import {
-  SurfaceAreaView,
   StyleSheet,
   Text,
   View,
-  Button,
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-
 import { LinearGradient } from "expo-linear-gradient";
 import UserCard from "../userCard";
 import LatestReport from "./LatestReport";
-import { Card } from "react-native-paper";
+import { Button, Card } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Home() {
   const navigation = useNavigation();
   return (
-    // <LinearGradient
-
-    //         colors={['rgba(51, 176, 107, 0.8)', 'rgba(34, 87, 58, 0.8)']}
-    //         style={styles.container}
-    //       >
-    <View styles={styles.container}>
-      <ScrollView>
+    <LinearGradient
+      colors={["#4c669f", "#3b5998", "#192f6a"]}
+      style={styles.gradient}
+    >
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         <UserCard />
         <LatestReport />
         <Text style={styles.heading}>Device Control</Text>
@@ -49,16 +44,19 @@ export default function Home() {
           <Text style={styles.logoutText}>Log Out</Text>
         </TouchableOpacity>
       </ScrollView>
-    </View>
-    // </LinearGradient>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  gradient: {
     flex: 1,
+  },
+  scrollContainer: {
+    flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingVertical: 20,
   },
   heading: {
     marginTop: 15,
@@ -66,13 +64,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     textDecorationLine: "underline",
+    color: "#fff",
   },
   card: {
     backgroundColor: "rgba(202, 237, 206, 0.8)",
     borderRadius: 15,
     padding: 25,
     margin: 15,
-    position: "relative",
     overflow: "hidden",
   },
   deviceControl: {
@@ -83,7 +81,6 @@ const styles = StyleSheet.create({
   controls: {
     fontWeight: "600",
     fontSize: 20,
-    padding: 0,
   },
   logoutButton: {
     backgroundColor: "#3498db",
@@ -95,7 +92,7 @@ const styles = StyleSheet.create({
   logoutText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#000", // Text color
+    color: "#000",
     textAlign: "center",
   },
 });
