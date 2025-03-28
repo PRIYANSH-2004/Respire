@@ -44,7 +44,7 @@ export default function Home() {
         </View>
         <TouchableOpacity
           style={styles.logoutButton}
-          onPress={() => console.log("Log Out Pressed")}
+          onPress={() => navigation.navigate("SignIn")}
         >
           <Text style={styles.logoutText}>Log Out</Text>
         </TouchableOpacity>

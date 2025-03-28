@@ -7,7 +7,8 @@ import PairDevice from "./app/screens/PairDevice";
 import FileTransfer from "./app/screens/FileTransfer";
 import DetailedReport from "./app/screens/DetailedReport";
 import TempDownload from "./app/screens/TempDownload";
-
+import SignIn from "./app/screens/SignIn";
+import SignUp from "./app/screens/SignUp";
 // Create the stack navigator
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,8 @@ export default function App() {
     <NavigationContainer style={styles.container}>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Reports" component={Reports} />
         <Stack.Screen name="Pair Device" component={PairDevice} />
         <Stack.Screen name="File Transfer" component={FileTransfer} />
