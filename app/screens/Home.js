@@ -15,7 +15,7 @@ export default function Home() {
   const navigation = useNavigation();
   return (
     <LinearGradient
-      colors={["#4c669f", "#3b5998", "#192f6a"]}
+      colors={["#fbc2eb", "#e0e0e0", "#a6c1ee"]}
       style={styles.gradient}
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
