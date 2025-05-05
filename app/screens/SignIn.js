@@ -48,7 +48,7 @@ const SignIn = () => {
           onPress: () => {
             navigation.reset({
               index: 0,
-              routes: [{ name: "Home" }],
+              routes: [{ name: "Home", params: { userName: foundUser.name } }],
             });
           },
         },

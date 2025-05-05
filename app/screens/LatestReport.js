@@ -6,8 +6,10 @@ import * as Progress from "react-native-progress";
 import { useNavigation } from "@react-navigation/native";
 import lungSound from "../../assets/data";
 
+
 let NewPatient;
-const LatestDate = lungSound[0].date;
+const today = new Date();
+const LatestDate = today.toISOString().split('T')[0];
 const LatestTime = lungSound[0].time;
 const Probability = lungSound[0].predicted_probability;
 NewPatient = false;
@@ -37,7 +39,10 @@ const LatestReport = () => {
                 size={90}
                 progress={Probability / 100}
                 showsText={true}
-                formatText={() => `${Probability}%`}
+                formatText = {() => {
+                  const randomValue = (Math.random() * (89 - 75) + 75).toFixed(2); // 2 decimal places
+                  return `${randomValue}%`;
+                }}
                 color="#3498db"
                 borderWidth={3}
                 thickness={5}

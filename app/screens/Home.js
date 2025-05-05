@@ -9,26 +9,30 @@ import { LinearGradient } from "expo-linear-gradient";
 import UserCard from "../userCard";
 import LatestReport from "./LatestReport";
 import { Button, Card } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 export default function Home() {
   const navigation = useNavigation();
+  const route = useRoute();
+  const userName = route.params?.userName || "Guest";
+
   return (
     <LinearGradient
       colors={["#fbc2eb", "#e0e0e0", "#a6c1ee"]}
       style={styles.gradient}
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <UserCard />
+        {/* <Text style={styles.heading}>Welcome, {userName}!</Text> */}
+        <UserCard userName={userName} />
         <LatestReport />
         <Text style={styles.heading}>Device Control</Text>
         <View style={styles.deviceControl}>
-          <Card
+          {/* <Card
             style={styles.card}
             onPress={() => navigation.navigate("Pair Device")}
           >
             <Text style={styles.controls}> Pair </Text>
-          </Card>
+          </Card> */}
 
           <Card
             style={styles.card}

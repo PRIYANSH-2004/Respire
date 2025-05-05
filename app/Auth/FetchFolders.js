@@ -2,8 +2,8 @@ import AWS from 'aws-sdk';
 import { Platform } from 'react-native';
 
 AWS.config.update({
-  accessKeyId: 'your-key',
-  secretAccessKey: 'your-secret',
+  accessKeyId: 'AKIA6GBMCWVLXZICD4OA',
+  secretAccessKey: '5iLoFHed7Os/xOwPOYEsBgmGUL+ANg/kA+AZnHCd',
   region: 'ap-south-1',
   });
 

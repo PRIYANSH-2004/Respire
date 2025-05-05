@@ -61,9 +61,10 @@ const Reports = () => {
                 </View>
                 <TouchableOpacity
                   style={styles.dowloadIcon}
-                  onPress={() => {
-                    handleDownload(item);
-                  }}
+                  // onPress={() => {
+                  //   handleDownload(item);
+                  // }}
+                  onPress={() => navigation.navigate("Detailed Report", { item })}
                 >
                   <MaterialIcons
                     name="file-download"
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
   },
   card: {
     flexDirection: "row",
-    backgroundColor: "rgba(51, 163, 176, 0.8)",
+    // backgroundColor: "rgba(51, 163, 176, 0.8)",
     padding: 25,
     margin: 10,
   },

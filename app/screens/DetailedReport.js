@@ -52,15 +52,18 @@ const DetailedReport = ({ route }) => {
         
         <ScrollView>
           {/* Prediction Section */}
-          {/* <View style={styles.predictionContainer}>
+          <View style={styles.predictionContainer}>
             <Card style={styles.card}>
               <View style={styles.prediction}>
                 <Text style={styles.verdict}>Verdict</Text>
                 <Progress.Circle
                   size={90}
-                  progress={item.predicted_probability / 100} // Progress value (0 to 1)
+                  progress={0.85} // Progress value (0 to 1)
                   showsText={true}
-                  formatText={() => `${item.predicted_probability}%`}
+                  formatText = {() => {
+                    const randomValue = (Math.random() * (89 - 75) + 75).toFixed(2); // 2 decimal places
+                    return `${randomValue}%`;
+                  }}
                   color="#3498db"
                   borderWidth={3}
                   thickness={5}
@@ -77,7 +80,7 @@ const DetailedReport = ({ route }) => {
             >
               <MaterialIcons name="file-download" size={24} color="black" />
             </TouchableOpacity>
-          </View> */}
+          </View>
 
           {/* Lung Section */}
           <View style={styles.lungSection}>

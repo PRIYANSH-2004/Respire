@@ -5,7 +5,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import Reports from "./screens/Reports";
 
-const UserCard = () => {
+const UserCard = ({ userName }) => {
   return (
     <LinearGradient
       colors={["rgba(51, 176, 107, 0.8)", "rgba(34, 87, 58, 0.8)"]}
@@ -35,12 +35,12 @@ const UserCard = () => {
         </View>
 
         <Text style={styles.patientText}>Patient</Text>
-        <Text style={styles.name}>Richard</Text>
+        <Text style={styles.name}>{userName}</Text>
 
         <View style={styles.infoContainer}>
           <Text style={styles.infoText}>
             Age{"\n"}
-            <Text style={styles.boldText}>38 yrs</Text>
+            <Text style={styles.boldText}>20 yrs</Text>
           </Text>
           <Text style={styles.infoText}>
             Gender{"\n"}
@@ -48,7 +48,7 @@ const UserCard = () => {
           </Text>
           <Text style={styles.infoText}>
             Mobile No.{"\n"}
-            <Text style={styles.boldText}>9999999999</Text>
+            <Text style={styles.boldText}>7891000444</Text>
           </Text>
         </View>
       </Card>
