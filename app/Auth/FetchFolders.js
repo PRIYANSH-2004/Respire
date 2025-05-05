@@ -1,7 +1,6 @@
 import AWS from 'aws-sdk';
 import { Platform } from 'react-native';
 
-// Use environment variables for security
 AWS.config.update({
   accessKeyId: 'your-key',
   secretAccessKey: 'your-secret',

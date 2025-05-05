@@ -5,16 +5,38 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Linking } from "react-native";
 import { Card } from "react-native-paper";
 import * as Progress from "react-native-progress";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
-
+import { fetchFilesInDirectory } from "../Auth/DataRecieve";
 const DetailedReport = ({ route }) => {
   const { item } = route.params;
   const navigation = useNavigation();
+  const [files, setFiles] = useState([]);
+
+  useEffect(()=>{
+    const FetchFiles = async() =>{
+      try{
+        const allFiles = await fetchFilesInDirectory(item);
+        setFiles(allFiles)
+        // files.forEach((file, index) => {
+        //   console.log(`File ${index + 1}:`);
+        //   Object.entries(file).forEach(([key, value]) => {
+        //     console.log(`  ${key}: ${value} (type: ${typeof value})`);
+        //   });
+        // });
+      }
+      catch{
+        console.error("Error fetching folders:", error);
+      }
+    }
+    FetchFiles();
+  }, [])
+
 
   const handleDownload = (item) => {
     // console.log("Downloading item:", item);
@@ -27,9 +49,10 @@ const DetailedReport = ({ route }) => {
       style={styles.main}
     >
       <View style={styles.main}>
+        
         <ScrollView>
           {/* Prediction Section */}
-          <View style={styles.predictionContainer}>
+          {/* <View style={styles.predictionContainer}>
             <Card style={styles.card}>
               <View style={styles.prediction}>
                 <Text style={styles.verdict}>Verdict</Text>
@@ -54,34 +77,40 @@ const DetailedReport = ({ route }) => {
             >
               <MaterialIcons name="file-download" size={24} color="black" />
             </TouchableOpacity>
-          </View>
+          </View> */}
 
           {/* Lung Section */}
           <View style={styles.lungSection}>
-            {Object.entries(item)
-              .filter(([key]) =>
-                ["LL1", "LL2", "LL3", "RR1", "RR2", "RR3"].includes(key)
-              ) // Filter specific keys
-              .map(([key, value], index) => (
-                <Card key={index} style={styles.lungCard}>
-                  <Text style={styles.lungTitle}>{key}</Text>
-                  <Text style={styles.lungDescription}>{value}</Text>
-                  <Text
-                    style={[
-                      styles.lungStatus,
-                      key.includes("LL")
-                        ? styles.normalStatus
-                        : styles.criticalStatus, // Example logic for status
-                    ]}
-                  >
-                    {key.includes("LL") ? "Normal" : "Critical"}
-                  </Text>
-                </Card>
-              ))}
+            {files.map((file, index) => (
+              <Card key={index} style={styles.lungCard}>
+                <Text style={styles.lungTitle}>File Name</Text>
+                <Text style={styles.lungDescription}>{file.name}</Text>
+                <TouchableOpacity
+                  style={styles.downloadIcon}
+                  onPress={async () => {
+                                try {
+                                  // Open the link directly in the browser
+                                  await Linking.openURL(file.link);
+                                } catch (error) {
+                                  console.error("Error opening link:", error);
+                                  Alert.alert("Error", "Unable to open the link.");
+                                }
+                              }}
+                >
+                  <MaterialIcons name="file-download" size={24} color="black" />
+                </TouchableOpacity>
+              </Card>
+            ))}
           </View>
         </ScrollView>
       </View>
     </LinearGradient>
+    // <View>
+    //   <Text>
+    //     report
+    //     {/* {files[0].link} */}
+    //   </Text>
+    // </View>
   );
 };
 

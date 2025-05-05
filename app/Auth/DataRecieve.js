@@ -11,6 +11,54 @@ AWS.config.update({
 const s3 = new AWS.S3({ signatureVersion: 'v4' });
 const bucketName = 'respire-1';
 
+/**
+ * Fetches all items in the specified directory and returns an array of { name, link }.
+ * @param {string} folderDirectory - The directory to fetch items from.
+ * @returns {Promise<Array<{ name: string, link: string }>>} - Array of objects with name and link.
+ */
+export const fetchFilesInDirectory = async (folderDirectory) => {
+  try {
+    if (!folderDirectory) {
+      throw new Error('Folder directory is required');
+    }
+
+    // List all objects in the specified folder
+    const { Contents } = await s3.listObjectsV2({
+      Bucket: bucketName,
+      Prefix: `${folderDirectory}`, // Ensure folderDirectory ends with '/'
+    }).promise();
+
+    if (!Contents || Contents.length === 0) {
+      console.log('No files found in the specified folder');
+      return [];
+    }
+
+    // Generate signed URLs for each file
+    const expirySeconds = Platform.OS === 'android' ? 3600 : 7200;
+    const files = await Promise.all(
+      Contents.filter(file => !file.Key.endsWith('/')) // Exclude folder markers
+        .map(async (file) => {
+          const params = {
+            Bucket: bucketName,
+            Key: file.Key,
+            Expires: expirySeconds,
+          };
+
+          return {
+            name: file.Key.split('/').pop(), // Extract file name
+            link: s3.getSignedUrl('getObject', params), // Generate signed URL
+            lastModified: file.LastModified, // Include lastModified property
+          };
+        })
+    );
+
+    return files;
+  } catch (error) {
+    console.error('Error fetching files in directory:', error);
+    throw new Error('Failed to fetch files');
+  }
+};
+
 export const getLatestFolder = async () => {
   try {
     // 1. List all potential folders using common prefixes
@@ -46,7 +94,7 @@ export const downloadLatestFiles = async () => {
     // 1. List all objects in the latest folder
     const { Contents } = await s3.listObjectsV2({
       Bucket: bucketName,
-      Prefix: `${latestFolder}/`
+      Prefix: `${latestFolder}`
     }).promise();
     
         if (!Contents || Contents.length === 0) {
@@ -56,10 +104,12 @@ export const downloadLatestFiles = async () => {
     
         // 2. Sort files by LastModified (newest first)
         const sortedFiles = Contents
-          .filter(file => !file.Key.endsWith('/')) 
-          .sort((a, b) =>
-            new Date(b.Name) - new Date(a.Name)
-          );
+          .filter(file => !file.Key.endsWith('/'))
+          .sort((a, b) => {
+            const dateA = new Date(a.LastModified);
+            const dateB = new Date(b.LastModified);
+            return dateB - dateA;
+          });
     
         // 3. Generate signed URLs with device-specific expiration
         const expirySeconds = Platform.OS === 'android' ? 3600 : 7200;

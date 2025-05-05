@@ -41,41 +41,7 @@ const Reports = () => {
     colors={["#fbc2eb", "#e0e0e0", "#a6c1ee"]}
       style={styles.gradient}
     >
-      <ScrollView>
-        {/* <Text>Reports</Text> */}
-        {lungSound.map((item, index) => (
-          <View key={index}>
-            <Card
-              style={styles.card}
-              onPress={() => navigation.navigate("Detailed Report", { item })}
-            >
-              <View style={styles.cardRow}>
-                <View style={styles.indexBox}>
-                  <Text style={styles.indexText}>{index + 1}</Text>
-                </View>
-                <View>
-                  <Text>Date: {item.date}</Text>
-
-                  <Text>Time: {item.time}</Text>
-                </View>
-                <TouchableOpacity
-                  style={styles.dowloadIcon}
-                  onPress={() => {
-                    handleDownload(item);
-                  }}
-                >
-                  <MaterialIcons
-                    name="file-download"
-                    size={24}
-                    // color="#3498db"
-                    color="black"
-                  />
-                </TouchableOpacity>
-              </View>
-            </Card>
-          </View>
-        ))}
-      </ScrollView>
+      
       <ScrollView>
         {/* <Text>Reports</Text> */}
         {allFolders.map((item, index) => (
