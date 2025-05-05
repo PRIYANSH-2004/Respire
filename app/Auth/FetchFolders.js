@@ -3,8 +3,8 @@ import { Platform } from 'react-native';
 
 // Use environment variables for security
 AWS.config.update({
-  accessKeyId: 'AKIA6GBMCWVLXZICD4OA',
-  secretAccessKey: '5iLoFHed7Os/xOwPOYEsBgmGUL+ANg/kA+AZnHCd',
+  accessKeyId: 'your-key',
+  secretAccessKey: 'your-secret',
   region: 'ap-south-1',
   });
 
